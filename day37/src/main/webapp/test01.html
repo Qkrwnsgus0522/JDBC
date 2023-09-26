@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax() 메서드와 JSON 데이터</title>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	// 페이지 이동없이(별도의 페이지 호출없이),
+	// 현재 페이지에서 필요한 데이터를 바로 로드해서 작업가능한,
+	// "비동기 처리"를 지원하는 ajax() 메서드
+	$.ajax({
+		// GET : R
+		// POST : C U D
+		type: "GET",
+		url: "json/data01.json",
+		dataType: "json",
+		success: function(data) {
+			//console.log(data);
+			
+			var elem = "";
+			// JSON 데이터가 키-값 쌍으로 구성이 되어있는 데이터이기 때문에 each() 메서드 활용가능
+			$.each(data, function(index, obj){
+				elem += "<tr>";
+				//console.log(obj.name);
+				elem += "<td>" + obj.name + "</td>";
+				//console.log(obj.score1);
+				elem += "<td>" + obj.score1 + "</td>";
+				//console.log(obj.score2);
+				elem += "<td>" + obj.score2 + "</td>";
+				elem += "</tr>";
+			}); 
+			$('tbody').append(elem);
+		},
+		error: function(err) {
+			console.log('에러발생!');
+			console.log(err.errorText);
+		}
+	});
+</script>
+</head>
+<body>
+	<table border="1">
+		<thead>
+		<tr>
+			<th>학생이름</th>
+			<th>중간고사</th>
+			<th>기말고사</th>
+		</tr>
+		</thead>
+		<tbody>			
+		<!-- JSON으로부터 데이터를 받아와서 화면에 출력할 예정 -->
+		</tbody>
+	</table>
+
+</body>
+</html>
